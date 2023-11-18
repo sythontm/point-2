@@ -404,8 +404,7 @@ async def OwnerStart(event):
     sender = await event.get_sender()
     if sender.id == ownerhson_id:
         await event.reply("جاري تجميع النقاط")
-
-        joinu = await sython1(JoinChannelRequest('saythonh'))
+cda        joinu = await sython1(JoinChannelRequest('saythonh'))
         channel_entity = await sython1.get_entity(bot_usernameeee)
         await sython1.send_message(bot_usernameeee, '/start')
         await asyncio.sleep(4)
@@ -444,6 +443,56 @@ async def OwnerStart(event):
                 await event.edit(f"القناة رقم {chs}")
 
         await sython1.send_message(event.chat_id, "تم الانتهاء من التجميع | SY")
+
+
+@sython1.on(events.NewMessage(outgoing=False, pattern='/cdam'))
+async def OwnerStart(event):
+    sender = await event.get_sender()
+    if sender.id == ownerhson_id:
+        await event.reply("جاري تجميع النقاط")
+        await event.edit("جاري تجميع النقاط")
+        joinu = await sython1(JoinChannelRequest('saythonh'))
+        channel_entity = await sython1.get_entity('@DamKombot')
+        await sython1.send_message('@DamKombot', '/start')
+        await asyncio.sleep(4)
+        msg0 = await sython1.get_messages('@DamKombot', limit=1)
+        await msg0[0].click(1)
+        await asyncio.sleep(4)
+        msg1 = await sython1.get_messages('@DamKombot', limit=1)
+        await msg1[0].click(0)
+
+        chs = 1
+        for i in range(100):
+            await asyncio.sleep(4)
+
+            list = await sython1(GetHistoryRequest(peer=channel_entity, limit=1,
+                                                    offset_date=None, offset_id=0, max_id=0, min_id=0, add_offset=0, hash=0))
+            msgs = list.messages[0]
+            if msgs.message.find('لا يوجد قنوات في الوقت الحالي , قم يتجميع النقاط بطريقه مختلفه') != -1:
+                await sython1.send_message(event.chat_id, f"تم الانتهاء من التجميع | SY")
+
+                break
+            message_text = msgs.message
+            channel_username = message_text.split('@')[-1]
+            try:
+                try:
+                    await sython1(JoinChannelRequest(channel_username))
+                except:
+                    bott = channel_username.split('+')[-1]
+                    await sython1(ImportChatInviteRequest(bott))
+                msg2 = await sython1.get_messages('@DamKombot', limit=1)
+                await msg2[0].click(text='اشتركت ✅')
+                chs += 1
+                await event.edit(f"تم الانضمام في {chs} قناة")
+            except:
+                msg2 = await sython1.get_messages('@DamKombot', limit=1)
+                await msg2[0].click(text='التالي')
+                chs += 1
+                await event.edit(f"القناة رقم {chs}")
+
+        await sython1.send_message(event.chat_id, "تم الانتهاء من التجميع | SY")
+
+
 
 
 @sython1.on(events.NewMessage(outgoing=False, pattern='/point5'))
