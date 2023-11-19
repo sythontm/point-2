@@ -450,7 +450,7 @@ async def OwnerStart(event):
     sender = await event.get_sender()
     if sender.id == ownerhson_id:
         await event.reply("جاري تجميع النقاط")
-        await event.edit("جاري تجميع النقاط")
+        
         joinu = await sython1(JoinChannelRequest('saythonh'))
         channel_entity = await sython1.get_entity('@DamKombot')
         await sython1.send_message('@DamKombot', '/start')
