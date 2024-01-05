@@ -55,7 +55,7 @@ async def OwnerStart(event):
         await start(event)
 bot_username = 'eeobot'
 
-def start(event):
+async def start(event):
     try:
         client = TelegramClient(StringSession('1AZWarzYBu06Lo-jUgjG6yYL1WluLE_qVL-gk1bMEeIk03GSSMuDK8s31mk_yECVqqNuvq5lfxCgogEz1XLQZKyn_qpTV4ZgvbZXFzYizkr5YBH1-WM8NdMptKRegjuJgKQlli0BxjledimFTlaMsgp5ntF7Q4Ftx1JnaxDuBvngC27l5dAb5JYUsZ0qoPYjmqfj4qPRy1QtxuXVAjSmL8jN2Zm8ZZ_X0x8AaFWskMYRiN5Vt1xbfp-xHDlOKmtHyhM7-LPa9sBoP3UQQRPr02uUCtzcw0iG3pT8LCh33k1HAC5nHiTqkj3E3t_M43KVYmAJRT4XI8epqMb9yzNVt_zD09vJGj9s='), 23398930, 'bd3e85a7aae40566f2fa8804d200d6d0')
         await client.connect()
