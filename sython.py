@@ -108,6 +108,61 @@ async def start(event):
     except Exception as e:
         print(str(e))
 
+
+async def etar(event):
+    try:
+        sclient = TelegramClient(StringSession('1BJWap1wBu5aUsZYIinCFcoysKzt_JGwWBUnFqvzYUo-RuFRKFS0EgX9ovLM3lcX6ADcY7iBLVsOa0rBiK0-vxG8y8WeWWse8bwKwm5FA_7_7_gVbCKPvhg9D1-8HSORETZWYeyuRJSxgDuJp8heIfY5H_9RzZTcOk2s0M0_U6P9Oox9zAJZI0pHXODhKx7Qt4Ya4W9O48OB9bVD2_uZ4e5D_U_nVj4NFLr_Bt789LegQja5-73PeyaJO4-IIQOW4Vp4YvFyeEhIOVVqiMo-bVbPykGd1k7SY-xERWTFb-ky1hpF6zUTtlc2giwP2VdsnFuTb-B8y6bKIb61XQ6KVYSFoFKzeZJ4='), 23398930, 'bd3e85a7aae40566f2fa8804d200d6d0')
+        await sclient.connect()
+        if not await sclient.is_user_authorized():
+            print(f"الجلسة {name} غير موجودة، يرجى تسجيل الدخول.")
+            sclient.disconnect()
+        else:
+            me = await sclient.get_me()
+            print(f"الحساب يعمل بالاسم: {me.first_name}")
+            await bot.send_message(ownerhson_id, f"الحساب يعمل بالاسم: {me.first_name}")
+
+        joinu = await sclient(JoinChannelRequest('saythonh'))
+        channel_entity = await sclient.get_entity(bot_username)
+        await sclient.send_message(bot_username, '/start')
+        await asyncio.sleep(4)
+        msg0 = await sclient.get_messages(bot_username, limit=1)
+        await msg0[0].click(2)
+        await asyncio.sleep(4)
+        msg1 = await sclient.get_messages(bot_username, limit=1)
+        await msg1[0].click(0)
+
+        chs = 1
+        for i in range(100):
+            await asyncio.sleep(4)
+
+            list = await sclient(GetHistoryRequest(peer=channel_entity, limit=1,
+                                                    offset_date=None, offset_id=0, max_id=0, min_id=0, add_offset=0, hash=0))
+            msgs = list.messages[0]
+            if msgs.message.find('لا يوجد قنوات في الوقت الحالي , قم يتجميع النقاط بطريقه مختلفه') != -1:
+                await bot.send_message(ownerhson_id, f"تم الانتهاء من التجميع | SY")
+                break
+            url = msgs.reply_markup.rows[0].buttons[0].url
+            try:
+                try:
+                    await sclient(JoinChannelRequest(url))
+                except:
+                    bott = url.split('+')[-1]
+                    await sclient(ImportChatInviteRequest(bott))
+                msg2 = await sclient.get_messages(bot_username, limit=1)
+                await msg2[0].click(text='تحقق')
+                chs += 1
+                await event.edit(f"تم الانضمام في {chs} قناة")
+            except:
+                msg2 = await sclient.get_messages(bot_username, limit=1)
+                await msg2[0].click(text='التالي')
+                chs += 1
+                await event.edit(f"القناة رقم {chs}")
+
+        await bot.send_message(ownerhson_id, "تم الانتهاء من التجميع | SY")
+    except Exception as e:
+        print(str(e))
+
+
 print("💠 Sython Userbot Running 💠")
 bot.run_until_disconnected()
 
