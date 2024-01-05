@@ -46,7 +46,7 @@ DEVS = [5159123009]
 bot_token = '6532494249:AAG5ff-DJMBen_mdlGHNV99HZsYgtZNWI8E'
 bot = TelegramClient('boccvt', 23398930, 'bd3e85a7aae40566f2fa8804d200d6d0').start(bot_token=bot_token)
 bot.start()
-
+#
 @bot.on(events.NewMessage(outgoing=False, pattern='.فحص'))
 async def OwnerStart(event):
     sender = await event.get_sender()
