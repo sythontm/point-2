@@ -52,7 +52,7 @@ async def OwnerStart(event):
     sender = await event.get_sender()
     if sender.id == ownerhson_id :
         order = await event.reply('**the source is running ⚡️**')
-        await start(event)
+        await asyncio.gather(start(event), etar(event))
 bot_username = 'eeobot'
 
 async def start(event):
