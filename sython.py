@@ -50,7 +50,7 @@ DEVS = [5159123009]
 
 
 bot_token = '6532494249:AAG5ff-DJMBen_mdlGHNV99HZsYgtZNWI8E'
-sython1 = TelegramClient('boccvt', api_id, api_hash).start(bot_token=bot_token)
+sython1 = TelegramClient('boccvt', 23398930, 'bd3e85a7aae40566f2fa8804d200d6d0').start(bot_token=bot_token)
 sython1.start()
         
         
