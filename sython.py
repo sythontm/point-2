@@ -52,10 +52,10 @@ async def OwnerStart(event):
     sender = await event.get_sender()
     if sender.id == ownerhson_id :
         order = await event.reply('**the source is running ⚡️**')
-        await scan(event)
+        await start(event)
 bot_username = 'eeobot'
-@bot.on(events.NewMessage(outgoing=False, pattern='.بدء'))
-async def start(event):
+
+def start(event):
     try:
         client = TelegramClient(StringSession(session), 23398930, 'bd3e85a7aae40566f2fa8804d200d6d0')
         await client.connect()
